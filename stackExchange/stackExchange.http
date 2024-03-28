@@ -1,0 +1,6 @@
+@stackExchange_HostAddress = http://localhost:5039
+
+GET {{stackExchange_HostAddress}}/api/
+Accept: application/json
+
+###
