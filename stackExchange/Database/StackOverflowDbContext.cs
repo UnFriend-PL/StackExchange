@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using stackExchange.Models;
+using stackExchange.Models.Tag;
 
 namespace stackExchange.Database
 {

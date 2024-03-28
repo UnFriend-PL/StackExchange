@@ -11,9 +11,11 @@ services:
     environment:
       DB_HOST: sqlserver
       DB_NAME: StackExchangeDB
-      DB_USER: StackExchangeUser
-      DB_PASSWORD: StackExchangePassword
-
+      DB_USER: sa 
+      DB_PASSWORD: "YourStrong!Passw0rd" 
+    # command: ["sh", "-c", "dotnet ef database update && dotnet stackExchange.dll"]
+    networks:
+      - my-network
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
@@ -21,3 +23,8 @@ services:
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
+    networks:
+      - my-network
+networks:
+  my-network:
+    driver: bridge
