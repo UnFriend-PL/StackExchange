@@ -29,8 +29,8 @@ namespace stackExchange.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
+                    b.Property<long>("Count")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("HasSynonyms")
                         .HasColumnType("bit");

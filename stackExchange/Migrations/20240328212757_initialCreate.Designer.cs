@@ -11,7 +11,7 @@ using stackExchange.Database;
 namespace stackExchange.Migrations
 {
     [DbContext(typeof(StackOverflowDbContext))]
-    [Migration("20240328175449_initialCreate")]
+    [Migration("20240328212757_initialCreate")]
     partial class initialCreate
     {
         /// <inheritdoc />
@@ -32,8 +32,8 @@ namespace stackExchange.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
+                    b.Property<long>("Count")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("HasSynonyms")
                         .HasColumnType("bit");

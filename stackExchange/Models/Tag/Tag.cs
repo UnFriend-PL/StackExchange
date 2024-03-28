@@ -18,7 +18,7 @@ namespace stackExchange.Models.Tag
         /// <summary>
         /// The number of questions associated with the tag.
         /// </summary>
-        public int Count { get; set; }
+        public long Count { get; set; }
 
         /// <summary>
         /// Indicates whether the tag has synonyms.

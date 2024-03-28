@@ -17,7 +17,7 @@ namespace stackExchange.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Count = table.Column<int>(type: "int", nullable: false),
+                    Count = table.Column<long>(type: "bigint", nullable: false),
                     HasSynonyms = table.Column<bool>(type: "bit", nullable: false),
                     IsModeratorOnly = table.Column<bool>(type: "bit", nullable: false),
                     IsRequired = table.Column<bool>(type: "bit", nullable: false)

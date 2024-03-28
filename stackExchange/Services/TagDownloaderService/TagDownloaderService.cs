@@ -44,7 +44,7 @@ namespace stackExchange.Services.TagService
 
             do
             {
-                var url = $"https://api.stackexchange.com/2.3/tags?order=desc&sort=popular&filter=default&site=stackoverflow&pagesize={PageSize}&page={pageNumber}";
+                var url = $"https://api.stackexchange.com/2.3/tags?sort=popular&filter=default&site=stackoverflow&pagesize={PageSize}&page={pageNumber}";
                 var response = await _httpClient.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
