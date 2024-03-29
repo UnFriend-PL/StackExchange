@@ -8,13 +8,13 @@ namespace stackExchange.Models.Tag
         /// The name of the Stack Overflow tag.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// The number of questions associated with the tag.
         /// </summary>
         [JsonProperty("count")]
-        public int Count { get; set; }
+        public int Count { get; set; } = 0;
 
         /// <summary>
         /// Indicates whether the tag has synonyms.

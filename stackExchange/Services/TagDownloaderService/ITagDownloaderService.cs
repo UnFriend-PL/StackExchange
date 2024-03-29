@@ -4,6 +4,6 @@ namespace stackExchange.Services.TagService
 {
     public interface ITagDownloaderService
     {
-        public Task<int> UpdateTagsAsync();
+        public Task<int> UpdateTagsAsync(bool? force = false);
     }
 }

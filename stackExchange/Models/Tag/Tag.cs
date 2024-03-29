@@ -13,12 +13,12 @@ namespace stackExchange.Models.Tag
         /// <summary>
         /// Name of the tag.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// The number of questions associated with the tag.
         /// </summary>
-        public long Count { get; set; }
+        public long Count { get; set; } = 0;
 
         /// <summary>
         /// Indicates whether the tag has synonyms.

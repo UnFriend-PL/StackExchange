@@ -15,7 +15,7 @@ namespace stackExchange.Services.TagService
             _logger = logger;
         }
 
-        public async Task<List<TagResult>> GetTagsAsync(int page, int pageSize, string sortByName, string descending)
+        public async Task<List<TagResult>> GetTagsAsync(int page, int pageSize, string? sortByName, string descending)
         {
             List<TagResult> tags;
             try

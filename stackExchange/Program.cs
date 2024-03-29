@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using stackExchange.Database;
 using stackExchange.Services.TagService;
 using System.Globalization;
@@ -12,11 +13,15 @@ namespace stackExchange
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Version = "v1" });
+
+                var filePath = Path.Combine(System.AppContext.BaseDirectory, "stackExchange.xml");
+                c.IncludeXmlComments(filePath);
+            });
             builder.Services.AddHttpClient();
             builder.Services.AddDbContext<StackOverflowDbContext>(options =>
             {
@@ -34,7 +39,6 @@ namespace stackExchange
                 await tagService.UpdateTagsAsync();
                 Console.WriteLine("Tags updated successfully.");
             }
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
