@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using stackExchange.Common.TagStatistics;
 using stackExchange.Database;
@@ -20,23 +21,22 @@ namespace stackExchange.Services.TagService
             _httpClient = httpClient;
             _context = context;
             _logger = logger;
-
         }
 
-        public async Task<int> UpdateTagsAsync(bool? force = false)
+        public async Task<int> UpdateTagsAsync(bool? clearDatabase = false)
         {
             int totalTagsDownloaded = 0;
             int pageNumber = 1;
             int totalNewAddedTags = 0;
             int tagsInDB = await _context.Tags.CountAsync();
-
-            if (tagsInDB >= 1000 && force == false)
+            bool hasMoreTagsToDwonload = false;
+            if (tagsInDB >= 1000 && clearDatabase == false)
             {
                 _logger.LogInformation("Tags already exist in the database. Skipping download.");
                 await CalculateTotalCountOfTags();
                 return 0;
             }
-            else if (force == true)
+            else if (clearDatabase == true)
             {
                 _logger.LogInformation("Force download enabled. Downloading tags...");
                 await _context.Tags.ExecuteDeleteAsync();
@@ -66,12 +66,13 @@ namespace stackExchange.Services.TagService
                     if (tagResponse?.Items != null && tagResponse.Items.Count > 0)
                     {
                         totalNewAddedTags += await SaveTagsToDbAsync(tagResponse.Items);
+                        hasMoreTagsToDwonload = tagResponse.HasMore;
                         totalTagsDownloaded += tagResponse.Items.Count;
                     }
                 }
 
                 pageNumber++;
-            } while (totalTagsDownloaded < 1000);
+            } while (totalTagsDownloaded < 1000 && hasMoreTagsToDwonload);
 
             _logger.LogDebug("Tags downloaded: {TotalTagsDownloaded}", totalTagsDownloaded);
             await CalculateTotalCountOfTags();

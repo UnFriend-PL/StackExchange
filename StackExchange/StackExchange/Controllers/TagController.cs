@@ -62,7 +62,7 @@ namespace stackExchange.Controllers
         /// Forces a download of tags asynchronously.
         /// </summary>
         /// <returns>An <see cref="IActionResult"/> representing the asynchronous operation's result.</returns>
-        [HttpGet("ForceDownload")]
+        [HttpPost("ForceDownload")]
         public async Task<IActionResult> ForceDownloadAsync()
         {
             var downloaded = await _tagDownloaderService.UpdateTagsAsync(true);

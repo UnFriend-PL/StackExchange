@@ -15,11 +15,12 @@ namespace stackExchange.Services.TagService
             _logger = logger;
         }
 
-        public async Task<List<TagResult>> GetTagsAsync(int page, int pageSize, string? sortByName, string descending)
+        public async Task<List<TagResult>> GetTagsAsync(int page, int pageSize, string? sortByName, string? descending)
         {
             List<TagResult> tags;
             try
             {
+               
                 IQueryable<Tag> query = _context.Tags;
 
                 // sorting in descending (descending)
@@ -52,8 +53,6 @@ namespace stackExchange.Services.TagService
                                  .Take(pageSize)
                                  .Select(t => new TagResult(t))
                                  .ToListAsync();
-
-   
             }
             catch (Exception e)
             {

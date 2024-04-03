@@ -19,5 +19,6 @@ namespace stackExchange.Models.Tag
             IsRequired = tag.IsRequired;
             Distribution = Math.Round(tag.Count / (decimal)TagStatistics.TotalCountOfTags, 3);
         }
+        public TagResult() { }
     }
 }
